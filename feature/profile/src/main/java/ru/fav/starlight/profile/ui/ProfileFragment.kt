@@ -17,7 +17,10 @@ import ru.fav.starlight.utils.extensions.hideKeyboard
 import ru.fav.starlight.utils.extensions.observe
 import ru.fav.starlight.utils.extensions.observeNotSuspend
 import ru.fav.starlight.utils.extensions.showErrorDialog
+import kotlin.apply
 import kotlin.getValue
+import kotlin.text.trim
+import kotlin.toString
 
 @AndroidEntryPoint
 class ProfileFragment: Fragment(R.layout.fragment_profile) {
@@ -49,6 +52,7 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
         profileViewModel.effect.observeNotSuspend(viewLifecycleOwner) { state ->
             when (state) {
                 is ProfileEffect.ShowToast -> showToast(state.message)
+                is ProfileEffect.ShowErrorDialog -> showErrorDialog(state.message)
             }
         }
 
@@ -73,10 +77,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
                 }
                 is UpdateApiKeyState.Error.GlobalError -> {
                     showUpdateButtonLoading(false)
-
-                    showErrorDialog(
-                        message = state.message
-                    )
                 }
             }
         }
@@ -98,10 +98,6 @@ class ProfileFragment: Fragment(R.layout.fragment_profile) {
 
                 is ClearApiKeyState.Error -> {
                     showLogOutButtonLoading(false)
-
-                    showErrorDialog(
-                        message = state.message
-                    )
                 }
             }
         }

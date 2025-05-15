@@ -52,6 +52,7 @@ class DetailsFragment: Fragment(R.layout.fragment_details) {
         detailsViewModel.effect.observeNotSuspend(viewLifecycleOwner) { state ->
             when (state) {
                 is DetailsEffect.ShowToast -> showToast(state.message)
+                is DetailsEffect.ShowErrorDialog -> showErrorDialog(state.message)
             }
         }
 
@@ -67,10 +68,6 @@ class DetailsFragment: Fragment(R.layout.fragment_details) {
 
                 is NasaImageDetailsState.Error -> {
                     showLoading(false)
-
-                    showErrorDialog(
-                        message = state.message
-                    )
                 }
             }
         }

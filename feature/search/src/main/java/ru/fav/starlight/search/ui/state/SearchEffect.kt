@@ -9,4 +9,5 @@ sealed class SearchEffect {
         val initialDate: Calendar
         ) : SearchEffect()
     data class ShowToast(val message: String) : SearchEffect()
+    data class ShowErrorDialog(val message: String) : SearchEffect()
 }

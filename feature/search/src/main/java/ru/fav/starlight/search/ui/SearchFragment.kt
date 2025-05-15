@@ -72,6 +72,7 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
                     state.initialDate
                 )
                 is SearchEffect.ShowToast -> showToast(state.message)
+                is SearchEffect.ShowErrorDialog -> showErrorDialog(state.message)
             }
         }
 
@@ -97,10 +98,6 @@ class SearchFragment: Fragment(R.layout.fragment_search) {
                 }
                 is NasaImagesState.Error.GlobalError -> {
                     showLoading(false)
-
-                    showErrorDialog(
-                        message = state.message
-                    )
                 }
             }
         }
