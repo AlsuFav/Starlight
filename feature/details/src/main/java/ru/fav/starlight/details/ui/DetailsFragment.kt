@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import ru.fav.starlight.details.R
 import ru.fav.starlight.domain.model.NasaImageDetailsModel
-import ru.fav.starlight.presentation.util.ErrorDialogUtil
 import kotlin.getValue
 import android.graphics.drawable.Drawable
 import android.widget.Toast
@@ -24,6 +23,7 @@ import ru.fav.starlight.details.ui.state.DetailsEvent
 import ru.fav.starlight.details.ui.state.NasaImageDetailsState
 import ru.fav.starlight.utils.extensions.observe
 import ru.fav.starlight.utils.extensions.observeNotSuspend
+import ru.fav.starlight.utils.extensions.showErrorDialog
 
 @AndroidEntryPoint
 class DetailsFragment: Fragment(R.layout.fragment_details) {
@@ -68,8 +68,7 @@ class DetailsFragment: Fragment(R.layout.fragment_details) {
                 is NasaImageDetailsState.Error -> {
                     showLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }

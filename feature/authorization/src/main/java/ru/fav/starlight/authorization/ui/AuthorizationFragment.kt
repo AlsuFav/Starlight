@@ -9,9 +9,9 @@ import dev.androidbroadcast.vbpd.viewBinding
 import ru.fav.starlight.authorization.ui.state.AuthorizationEvent
 import ru.fav.starlight.authorization.ui.state.AuthorizationState
 import ru.fav.starlight.authorization.databinding.FragmentAuthorizationBinding
-import ru.fav.starlight.presentation.util.ErrorDialogUtil
 import ru.fav.starlight.authorization.R
 import ru.fav.starlight.utils.extensions.observe
+import ru.fav.starlight.utils.extensions.showErrorDialog
 
 @AndroidEntryPoint
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
@@ -58,8 +58,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
                 is AuthorizationState.Error.GlobalError -> {
                     showLoading(false)
 
-                    ErrorDialogUtil.showErrorDialog(
-                        context = requireContext(),
+                    showErrorDialog(
                         message = state.message
                     )
                 }
