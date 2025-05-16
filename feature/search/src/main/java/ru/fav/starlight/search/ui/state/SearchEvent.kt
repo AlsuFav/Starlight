@@ -4,7 +4,6 @@ import java.util.Calendar
 
 sealed class SearchEvent {
     object LoadInitialData : SearchEvent()
-    object LoadCurrentTimeMillis : SearchEvent()
     object OnStartDateClicked : SearchEvent()
     object OnEndDateClicked : SearchEvent()
     data class OnFetchImagesClicked(val startDate: String, val endDate: String) : SearchEvent()

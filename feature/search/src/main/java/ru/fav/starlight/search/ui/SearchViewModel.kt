@@ -56,7 +56,6 @@ class SearchViewModel @Inject constructor(
     fun reduce(event: SearchEvent) {
         when (event) {
             is SearchEvent.LoadInitialData -> loadInitialDates()
-            is SearchEvent.LoadCurrentTimeMillis -> getCurrentTimeMillis()
             is SearchEvent.OnFetchImagesClicked -> loadNasaImages(event.startDate, event.endDate)
             is SearchEvent.OnStartDateClicked -> showDatePicker(DateType.START)
             is SearchEvent.OnEndDateClicked -> showDatePicker(DateType.END)
@@ -163,8 +162,6 @@ class SearchViewModel @Inject constructor(
             ))
         }
     }
-
-    private fun getCurrentTimeMillis(): Long = dateProvider.getCurrentDate().timeInMillis
 
     private fun navigateToDetails(date: String) {
         navMain.goToDetailsPage(date)
